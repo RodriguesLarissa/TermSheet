@@ -1,1 +1,23 @@
-<p>deal-filters works!</p>
+<form [formGroup]="form" class="filters">
+  <mat-form-field appearance="outline">
+    <mat-label>Search Deal</mat-label>
+
+    <input matInput formControlName="search" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Operator</mat-label>
+
+    <mat-select formControlName="operator">
+      <mat-option value="greater"> Greater Than </mat-option>
+
+      <mat-option value="less"> Less Than </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Purchase Price</mat-label>
+
+    <input matInput type="number" formControlName="purchasePrice" />
+  </mat-form-field>
+</form>

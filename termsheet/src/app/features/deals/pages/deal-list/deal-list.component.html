@@ -20,12 +20,15 @@
         <mat-spinner diameter="40"></mat-spinner>
       </div>
     } @else {
-      <table mat-table [dataSource]="(deals$ | async) ?? []">
+      <app-deal-filters (filtersChanged)="updateFilters($event)" />
+      <table mat-table [dataSource]="(filteredDeals$ | async) ?? []">
         <ng-container matColumnDef="dealName">
           <th mat-header-cell *matHeaderCellDef>Deal Name</th>
 
           <td mat-cell *matCellDef="let deal">
-            {{ deal.dealName }}
+            <span
+              [innerHTML]="deal.dealName | highlight: filters.search"
+            ></span>
           </td>
         </ng-container>
 

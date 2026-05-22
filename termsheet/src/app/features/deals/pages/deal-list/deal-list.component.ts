@@ -15,11 +15,16 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 import { Deal } from '../../../../core/models/deals';
 import { AuthService } from '../../../../core/services/auth.service';
 import { DealService } from '../../../../core/services/deals.service';
+import { HighlightPipe } from '../../../../shared/pipes/highlight.pipe';
+import {
+  DealFilters,
+  DealFiltersComponent,
+} from '../../components/deal-filters/deal-filters.component';
 import { DealFormComponent } from '../../components/deal-form/deal-form.component';
 
 @Component({
@@ -37,6 +42,8 @@ import { DealFormComponent } from '../../components/deal-form/deal-form.componen
     MatIconModule,
     MatProgressSpinnerModule,
     MatDialogModule,
+    DealFiltersComponent,
+    HighlightPipe,
   ],
   templateUrl: './deal-list.component.html',
   styleUrl: './deal-list.component.scss',
@@ -50,9 +57,35 @@ export class DealListComponent {
     'capRate',
   ];
 
-  deals$: Observable<Deal[]> = this.dealService.deals$;
+  filteredDeals$: Observable<Deal[]> = this.dealService.deals$.pipe(
+    map((deals) => {
+      return deals.filter((deal) => {
+        const matchesSearch = deal.dealName
+          .toLowerCase()
+          .includes(this.filters.search.toLowerCase());
+
+        const purchasePrice = this.filters.purchasePrice;
+
+        if (!purchasePrice) {
+          return matchesSearch;
+        }
+
+        const matchesPrice =
+          this.filters.operator === 'greater'
+            ? deal.purchasePrice > purchasePrice
+            : deal.purchasePrice < purchasePrice;
+
+        return matchesSearch && matchesPrice;
+      });
+    }),
+  );
 
   isLoading = true;
+  filters: DealFilters = {
+    search: '',
+    operator: 'greater',
+    purchasePrice: null,
+  };
 
   constructor(
     private dealService: DealService,
@@ -86,5 +119,32 @@ export class DealListComponent {
     this.dialog.open(DealFormComponent, {
       width: '500px',
     });
+  }
+
+  updateFilters(filters: DealFilters): void {
+    this.filters = filters;
+
+    this.filteredDeals$ = this.dealService.deals$.pipe(
+      map((deals) => {
+        return deals.filter((deal) => {
+          const matchesSearch = deal.dealName
+            .toLowerCase()
+            .includes(filters.search.toLowerCase());
+
+          const purchasePrice = filters.purchasePrice;
+
+          if (!purchasePrice) {
+            return matchesSearch;
+          }
+
+          const matchesPrice =
+            filters.operator === 'greater'
+              ? deal.purchasePrice > purchasePrice
+              : deal.purchasePrice < purchasePrice;
+
+          return matchesSearch && matchesPrice;
+        });
+      }),
+    );
   }
 }
