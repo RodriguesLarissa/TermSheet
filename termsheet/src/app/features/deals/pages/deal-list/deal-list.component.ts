@@ -18,7 +18,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { map, Observable } from 'rxjs';
 
 import { Deal } from '../../../../core/models/deals';
-import { AuthService } from '../../../../core/services/auth.service';
+import { AuthService } from '../../../../core/services/auth/auth.service';
 import { DealService } from '../../../../core/services/deals.service';
 import { HighlightPipe } from '../../../../shared/pipes/highlight.pipe';
 import {
