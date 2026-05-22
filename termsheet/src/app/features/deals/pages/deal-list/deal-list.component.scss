@@ -1,0 +1,55 @@
+@use "../../../../styles/variables" as vars;
+
+mat-toolbar {
+  display: flex;
+  align-items: center;
+
+  background-color: white;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.logo {
+  height: 36px;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.page {
+  padding: 2rem;
+}
+
+mat-card {
+  padding: 2rem;
+  border-radius: 16px;
+}
+
+.header {
+  margin-bottom: 1.5rem;
+}
+
+table {
+  width: 100%;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  padding: 3rem;
+}
+
+.low-cap-rate {
+  color: #dc2626;
+  font-weight: 600;
+}
+
+.healthy-cap-rate {
+  color: #16a34a;
+  font-weight: 600;
+}
+
+.high-cap-rate {
+  color: #d97706;
+  font-weight: 600;
+}
