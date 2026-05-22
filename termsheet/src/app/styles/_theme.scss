@@ -1,0 +1,20 @@
+@use "@angular/material" as mat;
+@use "./variables" as vars;
+
+@include mat.core();
+
+$theme: mat.define-light-theme(
+  (
+    color: (
+      primary: mat.define-palette(mat.$orange-palette),
+      accent: mat.define-palette(mat.$amber-palette),
+    ),
+  )
+);
+
+@include mat.all-component-themes($theme);
+
+.mat-mdc-raised-button.mat-primary {
+  background-color: vars.$primary-color !important;
+  color: white !important;
+}

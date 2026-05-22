@@ -1,0 +1,10 @@
+@use "./styles/variables";
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, sans-serif;
+  background-color: variables.$background-color;
+  color: variables.$text-color;
+}

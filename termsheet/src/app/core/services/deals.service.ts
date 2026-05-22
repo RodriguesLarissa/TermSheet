@@ -11,10 +11,6 @@ export class DealService {
 
   deals$ = this.dealsSubject.asObservable();
 
-  getDeals(): Observable<Deal[]> {
-    return of(MOCK_DEALS).pipe(delay(500));
-  }
-
   addDeal(deal: Deal): void {
     const currentDeals = this.dealsSubject.value;
 
