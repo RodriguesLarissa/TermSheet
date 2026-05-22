@@ -4,8 +4,8 @@ mat-toolbar {
   display: flex;
   align-items: center;
 
-  background-color: white;
-  border-bottom: 1px solid #e5e7eb;
+  background-color: vars.$background-color;
+  border-bottom: 1px solid vars.$gray-color;
 }
 
 .logo {
@@ -40,16 +40,37 @@ table {
 }
 
 .low-cap-rate {
-  color: #dc2626;
+  color: vars.$error-color;
   font-weight: 600;
 }
 
 .healthy-cap-rate {
-  color: #16a34a;
+  color: vars.$success-color;
   font-weight: 600;
 }
 
 .high-cap-rate {
-  color: #d97706;
+  color: vars.$primary-color;
   font-weight: 600;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 4rem 2rem;
+
+  text-align: center;
+
+  color: vars.$gray-color;
+}
+
+.empty-state mat-icon {
+  font-size: 64px;
+  width: 64px;
+  height: 64px;
+
+  margin-bottom: 1rem;
 }

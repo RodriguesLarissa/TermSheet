@@ -27,11 +27,8 @@ export class DealFormComponent {
   form = this.fb.group({
     dealName: ['', Validators.required],
     address: ['', Validators.required],
-
     purchasePrice: [null, [Validators.required, Validators.min(1)]],
-
     noi: [null, [Validators.required, Validators.min(1)]],
-
     capRate: [{ value: 0, disabled: true }],
   });
 
@@ -73,15 +70,10 @@ export class DealFormComponent {
 
     this.dealService.addDeal({
       id: Date.now(),
-
       dealName: rawValue.dealName ?? '',
-
       address: rawValue.address ?? '',
-
       purchasePrice: Number(rawValue.purchasePrice),
-
       noi: Number(rawValue.noi),
-
       capRate: Number(rawValue.capRate),
     });
 
