@@ -9,16 +9,18 @@ import { Router } from '@angular/router';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { MatTableModule } from '@angular/material/table';
-import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTableModule } from '@angular/material/table';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { Observable } from 'rxjs';
 
-import { AuthService } from '../../../../core/services/auth.service';
 import { Deal } from '../../../../core/models/deals';
+import { AuthService } from '../../../../core/services/auth.service';
 import { DealService } from '../../../../core/services/deals.service';
+import { DealFormComponent } from '../../components/deal-form/deal-form.component';
 
 @Component({
   selector: 'app-deal-list',
@@ -34,6 +36,7 @@ import { DealService } from '../../../../core/services/deals.service';
     MatButtonModule,
     MatIconModule,
     MatProgressSpinnerModule,
+    MatDialogModule,
   ],
   templateUrl: './deal-list.component.html',
   styleUrl: './deal-list.component.scss',
@@ -55,6 +58,7 @@ export class DealListComponent {
     private dealService: DealService,
     private authService: AuthService,
     private router: Router,
+    private dialog: MatDialog,
   ) {
     setTimeout(() => {
       this.isLoading = false;
@@ -76,5 +80,11 @@ export class DealListComponent {
     }
 
     return 'high-cap-rate';
+  }
+
+  openAddDealDialog(): void {
+    this.dialog.open(DealFormComponent, {
+      width: '500px',
+    });
   }
 }

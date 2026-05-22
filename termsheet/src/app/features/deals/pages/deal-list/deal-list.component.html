@@ -10,6 +10,9 @@
   <mat-card>
     <div class="header">
       <h2>Deals</h2>
+      <button mat-raised-button color="primary" (click)="openAddDealDialog()">
+        Add Deal
+      </button>
     </div>
 
     @if (isLoading) {

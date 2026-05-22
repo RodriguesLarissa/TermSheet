@@ -1,1 +1,41 @@
-<p>deal-form works!</p>
+<h2 mat-dialog-title>Add Deal</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="form">
+    <mat-form-field appearance="outline">
+      <mat-label>Deal Name</mat-label>
+
+      <input matInput formControlName="dealName" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Address</mat-label>
+
+      <input matInput formControlName="address" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Purchase Price</mat-label>
+
+      <input matInput type="number" formControlName="purchasePrice" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>NOI</mat-label>
+
+      <input matInput type="number" formControlName="noi" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Cap Rate (%)</mat-label>
+
+      <input matInput formControlName="capRate" />
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+
+  <button mat-raised-button color="primary" (click)="submit()">Save</button>
+</mat-dialog-actions>
